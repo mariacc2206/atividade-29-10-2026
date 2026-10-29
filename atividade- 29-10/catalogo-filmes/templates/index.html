@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Filmes</title>
+</head>
+<body>
+    <h1>Meu Catálogo de Filmes</h1>
+
+    <a href="{{ url_for('novo') }}">Cadastrar novo filme</a>
+
+    <hr>
+
+    {% for filme in filmes %}
+        <h2>{{ filme.titulo }}</h2>
+        <p>Gênero: {{ filme.genero }}</p>
+        <p>Ano: {{ filme.ano }}</p>
+        <p>Nota: {{ filme.nota }}</p>
+
+        <a href="{{ url_for('editar', id=filme.id) }}">Editar</a>
+
+        <form action="{{ url_for('excluir', id=filme.id) }}" method="POST">
+            <button type="submit">Excluir</button>
+        </form>
+
+        <hr>
+    {% else %}
+        <p>Nenhum filme cadastrado ainda.</p>
+    {% endfor %}
+</body>
+</html>
